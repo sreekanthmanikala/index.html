@@ -407,12 +407,13 @@ function googleSignIn(){
   auth.signInWithPopup(googleProvider)
     .then(result=>{
       const user=result.user;
+      document.getElementById('googleLoading').style.display='none';
       loginUser({name:user.displayName||user.email,email:user.email,photo:user.photoURL||'G'});
     })
     .catch(err=>{
       document.getElementById('googleLoading').style.display='none';
       document.getElementById('loginForm').style.display='block';
-      document.getElementById('loginError').textContent='Google Sign-In failed: '+err.message;
+      document.getElementById('loginError').textContent='Try again! ('+err.code+')';
     });
 }
 
