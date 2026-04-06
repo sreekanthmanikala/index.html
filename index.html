@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Digital Gaming Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCoaaUWW5zS9uNvZ1BMOUb15i7iqnIAbE8",
+    authDomain: "digital-gaming-5c4f9.firebaseapp.com",
+    projectId: "digital-gaming-5c4f9",
+    storageBucket: "digital-gaming-5c4f9.firebasestorage.app",
+    messagingSenderId: "950937461489",
+    appId: "1:950937461489:web:9b578b84d4d6c329dc3f50",
+    measurementId: "G-32DSD6C3Y7"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+</script>
 <style>
   :root {
     --neon: #00f5ff;
@@ -387,11 +404,16 @@ function googleSignIn(){
   document.getElementById('loginForm').style.display='none';
   document.getElementById('registerForm').style.display='none';
   document.getElementById('googleLoading').style.display='block';
-  const googleNames=['Arjun Patel','Priya Sharma','Rahul Verma','Ananya Singh','Dev Kumar','Pooja Reddy'];
-  const name=googleNames[Math.floor(Math.random()*googleNames.length)];
-  setTimeout(()=>{
-    loginUser({name,email:name.toLowerCase().replace(' ','.')+'@gmail.com',photo:'G'});
-  },1800);
+  auth.signInWithPopup(googleProvider)
+    .then(result=>{
+      const user=result.user;
+      loginUser({name:user.displayName||user.email,email:user.email,photo:user.photoURL||'G'});
+    })
+    .catch(err=>{
+      document.getElementById('googleLoading').style.display='none';
+      document.getElementById('loginForm').style.display='block';
+      document.getElementById('loginError').textContent='Google Sign-In failed: '+err.message;
+    });
 }
 
 function loginUser(u){
@@ -404,6 +426,7 @@ function loginUser(u){
 }
 
 function logout(){
+  auth.signOut();
   currentUser=null;
   document.getElementById('appWrapper').style.display='none';
   document.getElementById('loginPage').classList.add('active');
