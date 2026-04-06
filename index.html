@@ -43,7 +43,8 @@
   .page.active { display: block; }
 
   /* ===== LOGIN PAGE ===== */
-  #loginPage { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 999; background: var(--bg); }
+  #loginPage { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+  #loginPage.hidden { display: none !important; }
   .login-box {
     background: linear-gradient(135deg, #0a1628, #0d1f3c);
     border: 1px solid var(--neon);
@@ -232,7 +233,7 @@
 <div id="toast"></div>
 
 <!-- ===== LOGIN PAGE ===== -->
-<div id="loginPage" class="page active">
+<div id="loginPage" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px;">
   <div class="login-box">
     <div class="logo-title">DIGITAL</div>
     <div style="font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:900;color:var(--pink);text-shadow:0 0 15px var(--pink);margin-bottom:3px;">GAMING HUB</div>
@@ -420,7 +421,7 @@ function googleSignIn(){
 function loginUser(u){
   currentUser=u;
   document.getElementById('navUser').textContent='👤 '+u.name;
-  document.getElementById('loginPage').classList.remove('active');
+  document.getElementById('loginPage').style.display='none';
   document.getElementById('appWrapper').style.display='block';
   updateStats();
   showToast('Welcome, '+u.name+'! 🎮');
@@ -430,7 +431,7 @@ function logout(){
   auth.signOut();
   currentUser=null;
   document.getElementById('appWrapper').style.display='none';
-  document.getElementById('loginPage').classList.add('active');
+  document.getElementById('loginPage').style.display='flex';
   document.getElementById('loginForm').style.display='block';
   document.getElementById('registerForm').style.display='none';
   document.getElementById('googleLoading').style.display='none';
@@ -702,6 +703,13 @@ if(scores.length===0){
   ];
   localStorage.setItem('dgh_scores',JSON.stringify(scores));
 }
+
+// Firebase auto-login: if user already signed in with Google, skip login page
+auth.onAuthStateChanged(user=>{
+  if(user){
+    loginUser({name:user.displayName||user.email,email:user.email,photo:user.photoURL||'G'});
+  }
+});
 </script>
 </body>
 </html>
