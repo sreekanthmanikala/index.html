@@ -43,48 +43,59 @@
   .page.active { display: block; }
 
   /* ===== LOGIN PAGE ===== */
-  #loginPage { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-  #loginPage.hidden { display: none !important; }
+  #loginPage {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 20px; position: relative; overflow: hidden;
+    background: radial-gradient(ellipse at 50% 0%,#200003 0%,#0d0001 40%,#020000 80%,#000 100%);
+  }
+  .bg-grid { position:absolute;inset:0;background-image:linear-gradient(rgba(180,0,20,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(180,0,20,0.04) 1px,transparent 1px);background-size:55px 55px;pointer-events:none; }
+  .orb { position:absolute; border-radius:50%; pointer-events:none; }
+  .orb1 { width:500px;height:500px;background:radial-gradient(circle,rgba(180,0,20,0.18),transparent 70%);top:-180px;left:50%;transform:translateX(-50%); }
+  .orb2 { width:280px;height:280px;background:radial-gradient(circle,rgba(140,0,15,0.15),transparent 70%);bottom:-80px;left:-60px; }
+  .orb3 { width:260px;height:260px;background:radial-gradient(circle,rgba(150,0,15,0.15),transparent 70%);bottom:-60px;right:-60px; }
+  .scanline { position:absolute;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(200,0,20,0.2),transparent);animation:scanMove 5s linear infinite;pointer-events:none;z-index:1; }
+  @keyframes scanMove { 0%{top:0;} 100%{top:100%;} }
+  .game-float { position:absolute;border-radius:16px;border:1px solid rgba(200,0,30,0.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:linear-gradient(135deg,rgba(50,0,8,0.8),rgba(15,0,2,0.9)); }
+  .game-float .gf-emoji { font-size:2rem;line-height:1; }
+  .game-float .gf-label { font-size:0.55rem;letter-spacing:2px;text-transform:uppercase;color:rgba(200,80,80,0.7);font-family:'Orbitron',monospace; }
+  .gfl1{width:95px;height:95px;left:2%;top:14%;animation:floatL 7s ease-in-out infinite;}
+  .gfl2{width:88px;height:88px;left:2.5%;top:42%;animation:floatL 9s ease-in-out infinite 1.2s;}
+  .gfl3{width:92px;height:92px;left:1.5%;top:68%;animation:floatL 8s ease-in-out infinite 2.5s;}
+  .gfr1{width:95px;height:95px;right:2%;top:14%;animation:floatR 8s ease-in-out infinite 0.5s;}
+  .gfr2{width:88px;height:88px;right:2.5%;top:42%;animation:floatR 7s ease-in-out infinite 1.8s;}
+  .gfr3{width:92px;height:92px;right:1.5%;top:68%;animation:floatR 9s ease-in-out infinite 3s;}
+  @keyframes floatL{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-16px) rotate(2deg);}}
+  @keyframes floatR{0%,100%{transform:translateY(0) rotate(2deg);}50%{transform:translateY(-18px) rotate(-2deg);}}
+  .particle-bg{position:absolute;border-radius:50%;background:rgba(200,0,20,0.5);pointer-events:none;animation:riseUp linear infinite;}
+  @keyframes riseUp{0%{opacity:0;transform:translateY(0);}15%{opacity:0.8;}85%{opacity:0.3;}100%{opacity:0;transform:translateY(-100vh);}}
+
   .login-box {
-    background: linear-gradient(135deg, #0a1628, #0d1f3c);
-    border: 1px solid var(--neon);
-    border-radius: 20px;
-    padding: 40px 35px;
-    width: 100%;
-    max-width: 420px;
-    box-shadow: 0 0 40px rgba(0,245,255,0.2);
-    text-align: center;
+    background: rgba(6,0,1,0.95);
+    border: 1px solid rgba(200,0,30,0.45);
+    border-radius: 26px; padding: 36px 30px;
+    width: 100%; max-width: 420px;
+    box-shadow: 0 0 80px rgba(160,0,20,0.3), 0 0 200px rgba(100,0,10,0.15);
+    text-align: center; position: relative; z-index: 2;
   }
-  .logo-title { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--neon); text-shadow: 0 0 20px var(--neon); margin-bottom: 5px; }
-  .logo-sub { color: var(--pink); font-size: 1rem; font-weight: 600; margin-bottom: 30px; }
-  .login-input {
-    width: 100%; padding: 13px 18px; margin: 8px 0;
-    background: rgba(0,245,255,0.05); border: 1px solid rgba(0,245,255,0.3);
-    border-radius: 10px; color: var(--text); font-size: 1rem; font-family: 'Rajdhani', sans-serif;
-    outline: none; transition: border 0.3s;
-  }
-  .login-input:focus { border-color: var(--neon); box-shadow: 0 0 10px rgba(0,245,255,0.2); }
-  .btn-main {
-    width: 100%; padding: 14px; margin: 8px 0;
-    background: linear-gradient(135deg, var(--neon), #0080ff);
-    border: none; border-radius: 10px; color: #000;
-    font-size: 1.1rem; font-weight: 700; font-family: 'Rajdhani', sans-serif;
-    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .btn-main:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,245,255,0.4); }
-  .divider { display: flex; align-items: center; gap: 10px; margin: 12px 0; color: #556; }
-  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #334; }
-  .btn-google {
-    width: 100%; padding: 13px; margin: 8px 0;
-    background: #fff; border: none; border-radius: 10px;
-    color: #333; font-size: 1rem; font-weight: 700; font-family: 'Rajdhani', sans-serif;
-    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .btn-google:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,255,255,0.2); }
-  .google-icon { width: 22px; height: 22px; }
-  .toggle-link { color: var(--neon); cursor: pointer; text-decoration: underline; }
-  .error-msg { color: var(--pink); font-size: 0.9rem; margin-top: 8px; }
+  .login-box::before { content:'';position:absolute;inset:-1px;border-radius:26px;background:linear-gradient(135deg,rgba(200,0,30,0.2),transparent 45%,transparent 55%,rgba(200,0,30,0.1));pointer-events:none; }
+  .logo-title { font-family:'Orbitron',monospace; font-size:1.25rem; font-weight:900; letter-spacing:3px; white-space:nowrap; margin-bottom:4px; }
+  .word-digital { color:#ff2244; text-shadow:0 0 20px rgba(255,30,50,0.9),0 0 40px rgba(200,0,20,0.6); }
+  .word-gaming { color:#ff6600; text-shadow:0 0 20px rgba(255,100,0,0.9),0 0 40px rgba(200,60,0,0.6); }
+  .word-hub { color:#ffcc00; text-shadow:0 0 20px rgba(255,200,0,0.9),0 0 40px rgba(200,150,0,0.6); }
+  .logo-line { width:80%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,100,0,0.6),transparent);margin:8px auto; }
+  .logo-sub { font-family:'Orbitron',monospace;font-size:0.7rem;font-weight:700;color:#ff4400;letter-spacing:4px;text-shadow:0 0 15px rgba(255,80,0,0.8);margin-bottom:22px; }
+  .login-input { width:100%;padding:12px 16px;margin:6px 0;background:rgba(100,0,8,0.08);border:1px solid rgba(180,0,20,0.25);border-radius:11px;color:#fff;font-size:0.95rem;font-family:'Rajdhani',sans-serif;outline:none;transition:all 0.3s; }
+  .login-input:focus { border-color:#ff1a1a;box-shadow:0 0 15px rgba(255,0,30,0.35);background:rgba(180,0,20,0.2); }
+  .login-input::placeholder { color:#663344; }
+  .btn-main { width:100%;padding:14px;margin:10px 0 6px;background:linear-gradient(135deg,#aa0015,#600008);border:1px solid rgba(200,0,20,0.4);border-radius:11px;color:#fff;font-size:0.95rem;font-weight:700;font-family:'Orbitron',monospace;letter-spacing:3px;cursor:pointer;box-shadow:0 5px 25px rgba(150,0,15,0.45);transition:all 0.3s; }
+  .btn-main:hover { transform:translateY(-2px);box-shadow:0 8px 30px rgba(200,0,20,0.6); }
+  .divider { display:flex;align-items:center;gap:10px;margin:8px 0;color:rgba(255,80,80,0.3);font-size:0.8rem; }
+  .divider::before,.divider::after { content:'';flex:1;height:1px;background:rgba(180,0,20,0.18); }
+  .btn-google { width:100%;padding:12px;background:rgba(240,240,240,0.95);border:none;border-radius:11px;color:#222;font-size:0.9rem;font-weight:700;font-family:'Rajdhani',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.3s; }
+  .btn-google:hover { transform:translateY(-2px);box-shadow:0 5px 20px rgba(255,255,255,0.3); }
+  .google-icon { width:20px;height:20px; }
+  .toggle-link { color:#cc2233;cursor:pointer;text-decoration:underline; }
+  .error-msg { color:#ff4444;font-size:0.9rem;margin-top:8px; }
 
   /* ===== NAV ===== */
   nav {
@@ -233,11 +244,27 @@
 <div id="toast"></div>
 
 <!-- ===== LOGIN PAGE ===== -->
-<div id="loginPage" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px;">
+<div id="loginPage" style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;">
+  <div class="bg-grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="scanline"></div>
+  <div class="game-float gfl1"><span class="gf-emoji">🐍</span><span class="gf-label">Snake</span></div>
+  <div class="game-float gfl2"><span class="gf-emoji">💣</span><span class="gf-label">Mines</span></div>
+  <div class="game-float gfl3"><span class="gf-emoji">🧩</span><span class="gf-label">Puzzle</span></div>
+  <div class="game-float gfr1"><span class="gf-emoji">🎯</span><span class="gf-label">Quiz</span></div>
+  <div class="game-float gfr2"><span class="gf-emoji">🃏</span><span class="gf-label">Memory</span></div>
+  <div class="game-float gfr3"><span class="gf-emoji">❌</span><span class="gf-label">TicTac</span></div>
+
   <div class="login-box">
-    <div class="logo-title">DIGITAL</div>
-    <div style="font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:900;color:var(--pink);text-shadow:0 0 15px var(--pink);margin-bottom:3px;">GAMING HUB</div>
-    <div style="font-size:0.85rem;color:#556;margin-bottom:25px;">Your College Gaming Portal</div>
+    <div class="logo-title">
+      <span class="word-digital">DIGITAL</span>&nbsp;
+      <span class="word-gaming">GAMING</span>&nbsp;
+      <span class="word-hub">HUB</span>
+    </div>
+    <div class="logo-line"></div>
+    <div class="logo-sub">— GAME ON! 🎮 —</div>
 
     <div id="loginForm">
       <input class="login-input" type="text" id="loginName" placeholder="Your Name" />
@@ -703,6 +730,17 @@ if(scores.length===0){
   ];
   localStorage.setItem('dgh_scores',JSON.stringify(scores));
 }
+
+// Rising particles for login page
+function addParticles(){
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');
+    p.className='particle-bg';
+    p.style.cssText=`left:${Math.random()*100}%;bottom:0;position:fixed;width:${1+Math.random()*2.5}px;height:${1+Math.random()*2.5}px;animation-duration:${5+Math.random()*9}s;animation-delay:${Math.random()*9}s;z-index:0;`;
+    document.getElementById('loginPage').appendChild(p);
+  }
+}
+addParticles();
 
 // Firebase auto-login: if user already signed in with Google, skip login page
 auth.onAuthStateChanged(user=>{
