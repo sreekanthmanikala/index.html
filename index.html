@@ -568,8 +568,45 @@ function buildSnake(gc){
   }
   function draw(){
     C.fillStyle='#000';C.fillRect(0,0,360,360);
-    snake.forEach((s,i)=>{C.fillStyle=i===0?'#00f5ff':'#0080aa';C.fillRect(s.x*SZ+1,s.y*SZ+1,SZ-2,SZ-2);});
-    C.fillStyle='#ff0080';C.beginPath();C.arc(food.x*SZ+SZ/2,food.y*SZ+SZ/2,SZ/2-1,0,Math.PI*2);C.fill();
+    // Draw grid dots
+    for(let x=0;x<W;x++)for(let y=0;y<W;y++){C.fillStyle='rgba(0,80,0,0.15)';C.beginPath();C.arc(x*SZ+SZ/2,y*SZ+SZ/2,1,0,Math.PI*2);C.fill();}
+    // Draw food (pulsing apple)
+    C.fillStyle='#ff2244';C.shadowColor='#ff0000';C.shadowBlur=15;
+    C.beginPath();C.arc(food.x*SZ+SZ/2,food.y*SZ+SZ/2,SZ/2-1,0,Math.PI*2);C.fill();
+    C.fillStyle='#44ff44';C.shadowBlur=0;
+    C.fillRect(food.x*SZ+SZ/2,food.y*SZ+2,2,5);
+    C.shadowBlur=0;
+    // Draw snake body
+    snake.forEach((s,i)=>{
+      const x=s.x*SZ,y=s.y*SZ,r=SZ/2-1;
+      const ratio=i/snake.length;
+      if(i===0){
+        // HEAD - bright green with eyes
+        C.fillStyle='#00ee44';C.shadowColor='#00ff44';C.shadowBlur=12;
+        C.beginPath();C.roundRect(x+1,y+1,SZ-2,SZ-2,6);C.fill();
+        C.shadowBlur=0;
+        // Eyes
+        C.fillStyle='#000';
+        C.beginPath();C.arc(x+5,y+5,2.5,0,Math.PI*2);C.fill();
+        C.beginPath();C.arc(x+SZ-5,y+5,2.5,0,Math.PI*2);C.fill();
+        C.fillStyle='#fff';
+        C.beginPath();C.arc(x+5,y+5,1,0,Math.PI*2);C.fill();
+        C.beginPath();C.arc(x+SZ-5,y+5,1,0,Math.PI*2);C.fill();
+      } else if(i===snake.length-1){
+        // TAIL - thin pointed
+        const g=Math.floor(180-ratio*100);
+        C.fillStyle=`rgb(0,${g},30)`;
+        C.beginPath();C.roundRect(x+3,y+3,SZ-6,SZ-6,8);C.fill();
+      } else {
+        // BODY - gradient from bright to dark green
+        const g=Math.floor(200-ratio*120);
+        C.fillStyle=`rgb(0,${g},40)`;
+        C.beginPath();C.roundRect(x+1,y+1,SZ-2,SZ-2,5);C.fill();
+        // Scale pattern
+        C.fillStyle=`rgba(0,255,80,0.12)`;
+        C.beginPath();C.arc(x+SZ/2,y+SZ/2,SZ/2-3,0,Math.PI*2);C.fill();
+      }
+    });
   }
   document.onkeydown=e=>{if(!running)return;const m={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};if(m[e.key]){e.preventDefault();window.snakeDir(...m[e.key]);}};
   draw();
