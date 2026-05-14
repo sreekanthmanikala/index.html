@@ -604,7 +604,6 @@ let currentGameName='';
 let snakePauseRef=null;
 
 function pauseGame(){
-  if(!snakePauseRef)return;
   gamePaused=true;
   document.getElementById('pauseOverlay').classList.add('show');
 }
@@ -746,15 +745,11 @@ function showToast(msg){
 function loadGame(g){
   currentGameName=g;
   gamePaused=false;
-  document.getElementById('pauseOverlay').classList.remove('show');
   const titles={snake:'🐍 Snake',ttt:'❌ Tic Tac Toe',memory:'🃏 Memory Match',quiz:'🎯 Quiz Arena',mine:'💣 Minesweeper',slide:'🧩 Slide Puzzle'};
   document.getElementById('gameTitle').textContent=titles[g];
   showPage('game');
   const gc=document.getElementById('gameContainer');
-  // clear old content but keep pause overlay
-  const overlay=document.getElementById('pauseOverlay');
-  gc.innerHTML='';
-  gc.appendChild(overlay);
+  gc.innerHTML='<div id="pauseOverlay"><div class="pause-title">⏸ PAUSED</div><div class="pause-sub">— Game On Hold —</div><div class="pause-btns"><button class="pb pb-resume" onclick="resumeGame()">▶ RESUME</button><button class="pb pb-restart" onclick="restartCurrentGame()">↺ RESTART</button><button class="pb pb-home" onclick="showPage(\'home\')">🏠 HOME</button></div></div>';
   if(g==='snake')buildSnake(gc);
   else if(g==='ttt')buildTTT(gc);
   else if(g==='memory')buildMemory(gc);
