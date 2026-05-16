@@ -238,6 +238,7 @@
     .nav-logo { font-size: 0.9rem !important; }
     .nav-user { font-size: 0.75rem !important; }
     .btn-logout { padding: 6px 10px !important; font-size: 0.75rem !important; }
+    #desktopLogout { display: none !important; }
     .game-container { padding: 12px !important; }
     #mineBoard { grid-template-columns: repeat(9,30px) !important; }
     .mine-cell { width: 30px !important; height: 30px !important; font-size: 0.7rem !important; }
@@ -412,7 +413,7 @@
     </div>
     <div class="nav-right">
       <span class="nav-user" id="navUser">Player</span>
-      <button class="btn-logout" onclick="logout()">Logout</button>
+      <button class="btn-logout" id="desktopLogout" onclick="logout()">Logout</button>
     </div>
   </nav>
 
@@ -637,7 +638,8 @@ function playSound(type){
 // ===== LOADING SCREEN =====
 let loadPct=0;
 const loadTimer=setInterval(()=>{
-  loadPct+=3;
+  loadPct+=2;
+  if(loadPct>100)loadPct=100;
   document.getElementById('loadBar').style.width=loadPct+'%';
   document.getElementById('loadPct').textContent=loadPct+'%';
   if(loadPct>=100){
@@ -645,9 +647,9 @@ const loadTimer=setInterval(()=>{
     setTimeout(()=>{
       document.getElementById('loaderScreen').classList.add('hide');
       setTimeout(()=>document.getElementById('loaderScreen').style.display='none',800);
-    },300);
+    },400);
   }
-},40);
+},50);
 
 // ===== PAUSE SYSTEM =====
 let gamePaused=false;
@@ -733,6 +735,14 @@ function loginUser(u){
   document.getElementById('navUser').textContent='👤 '+u.name;
   document.getElementById('loginPage').style.display='none';
   document.getElementById('appWrapper').style.display='block';
+  // Clean up duplicate scores - keep only best per user per game
+  const bestScores={};
+  scores.forEach(s=>{
+    const key=s.user+'|'+s.game;
+    if(!bestScores[key]||s.score>bestScores[key].score){bestScores[key]=s;}
+  });
+  scores=Object.values(bestScores);
+  localStorage.setItem('dgh_scores',JSON.stringify(scores));
   updateStats();
   showToast('Welcome, '+u.name+'! 🎮');
 }
@@ -771,7 +781,12 @@ function updateStats(){
 }
 
 function addScore(game,score){
-  scores.push({user:currentUser.name,game,score,date:new Date().toLocaleDateString()});
+  const existing=scores.find(s=>s.user===currentUser.name&&s.game===game);
+  if(existing){
+    if(score>existing.score){existing.score=score;existing.date=new Date().toLocaleDateString();}
+  } else {
+    scores.push({user:currentUser.name,game,score,date:new Date().toLocaleDateString()});
+  }
   localStorage.setItem('dgh_scores',JSON.stringify(scores));
   updateStats();
   showToast('Score saved: '+score+' pts! 🏆');
@@ -781,7 +796,15 @@ function addScore(game,score){
 function buildLeaderboard(){
   const medals=['🥇','🥈','🥉'];
   const cls=['gold','silver','bronze'];
-  const sorted=[...scores].sort((a,b)=>b.score-a.score).slice(0,15);
+  // Keep only best score per user per game
+  const bestScores={};
+  scores.forEach(s=>{
+    const key=s.user+'|'+s.game;
+    if(!bestScores[key]||s.score>bestScores[key].score){
+      bestScores[key]=s;
+    }
+  });
+  const sorted=Object.values(bestScores).sort((a,b)=>b.score-a.score).slice(0,15);
   document.getElementById('lbList').innerHTML=sorted.length?sorted.map((s,i)=>`
     <div class="lb-row">
       <div class="lb-rank ${cls[i]||''}">${medals[i]||i+1}</div>
