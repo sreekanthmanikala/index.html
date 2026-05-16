@@ -209,13 +209,48 @@
 
   /* D-PAD for mobile */
   .dpad { display: none; }
+  /* MOBILE BOTTOM NAV */
+  #mobileNav { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(6,0,1,0.97); border-top: 1px solid rgba(255,0,30,0.3); z-index: 100; padding: 6px 0; }
+  .mob-nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .mob-nav-btn .mob-icon { font-size: 1.2rem; }
+  .mob-nav-btn .mob-label { font-size: 0.6rem; font-family: 'Rajdhani', sans-serif; color: #666; }
+  .mob-nav-btn.active .mob-label { color: #ff2244; }
+
   @media (max-width: 600px) {
-    .dpad { display: grid; grid-template-columns: repeat(3, 60px); grid-template-rows: repeat(3, 60px); gap: 5px; margin: 15px auto; width: fit-content; }
-    .dpad-btn { background: var(--card2); border: 1px solid rgba(0,245,255,0.3); border-radius: 8px; color: var(--neon); font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; }
+    .dpad { display: grid; grid-template-columns: repeat(3, 70px); grid-template-rows: repeat(3, 70px); gap: 6px; margin: 12px auto; width: fit-content; }
+    .dpad-btn { background: rgba(255,0,30,0.15); border: 1px solid rgba(255,0,50,0.4); border-radius: 12px; color: #ff4444; font-size: 1.8rem; display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; }
     .dpad-btn.empty { background: transparent; border: none; cursor: default; }
-    .quiz-opts { grid-template-columns: 1fr; }
+    .quiz-opts { grid-template-columns: 1fr !important; }
     .nav-links { display: none; }
-    #snakeCanvas { width: 280px !important; height: 280px !important; }
+    #snakeCanvas { width: 300px !important; height: 300px !important; }
+    .games-grid { grid-template-columns: repeat(2,1fr) !important; gap: 10px !important; padding: 0 12px 80px !important; }
+    .game-card { padding: 14px 8px !important; }
+    .game-icon { font-size: 2rem !important; margin-bottom: 8px !important; }
+    .game-title { font-size: 0.7rem !important; }
+    .game-desc { display: none !important; }
+    .hero { padding: 20px 15px 15px !important; }
+    .hero h1 { font-size: 1.3rem !important; }
+    .hero p { font-size: 0.85rem !important; }
+    .stats-row { gap: 8px !important; }
+    .stat-box { padding: 10px 12px !important; }
+    .stat-num { font-size: 1.5rem !important; }
+    nav { padding: 10px 15px !important; }
+    .nav-logo { font-size: 0.9rem !important; }
+    .nav-user { font-size: 0.75rem !important; }
+    .btn-logout { padding: 6px 10px !important; font-size: 0.75rem !important; }
+    .game-container { padding: 12px !important; }
+    #mineBoard { grid-template-columns: repeat(9,30px) !important; }
+    .mine-cell { width: 30px !important; height: 30px !important; font-size: 0.7rem !important; }
+    #memoryBoard { grid-template-columns: repeat(4,1fr) !important; gap: 6px !important; max-width: 300px !important; }
+    .mem-card { font-size: 1.4rem !important; }
+    #slideBoard { max-width: 240px !important; }
+    .slide-cell { font-size: 1.2rem !important; }
+    #tttBoard { max-width: 240px !important; }
+    .ttt-cell { font-size: 2rem !important; }
+    #mobileNav { display: flex !important; }
+    #lbPage { padding: 20px 12px 80px !important; }
+    .lb-row { padding: 10px 12px !important; font-size: 0.85rem !important; }
+    #gamePage { padding-bottom: 70px !important; }
   }
 
   /* TOAST */
@@ -558,6 +593,22 @@
 
     </div>
   </div>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <div id="mobileNav">
+    <button class="mob-nav-btn active" id="mnHome" onclick="showPage('home');setMobNav('mnHome')">
+      <span class="mob-icon">🏠</span><span class="mob-label">Home</span>
+    </button>
+    <button class="mob-nav-btn" id="mnScore" onclick="showPage('leaderboard');setMobNav('mnScore')">
+      <span class="mob-icon">🏆</span><span class="mob-label">Scores</span>
+    </button>
+    <button class="mob-nav-btn" id="mnAbout" onclick="showPage('about');setMobNav('mnAbout')">
+      <span class="mob-icon">ℹ️</span><span class="mob-label">About</span>
+    </button>
+    <button class="mob-nav-btn" id="mnLogout" onclick="logout()">
+      <span class="mob-icon">🚪</span><span class="mob-label">Logout</span>
+    </button>
+  </div>
 </div>
 
 <script>
@@ -695,6 +746,12 @@ function logout(){
   document.getElementById('registerForm').style.display='none';
   document.getElementById('googleLoading').style.display='none';
   document.getElementById('loginError').textContent='';
+}
+
+function setMobNav(id){
+  document.querySelectorAll('.mob-nav-btn').forEach(b=>b.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el)el.classList.add('active');
 }
 
 // ===== PAGE ROUTING =====
