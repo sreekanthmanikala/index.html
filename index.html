@@ -423,7 +423,7 @@
       <h1>🎮 DIGITAL GAMING HUB</h1>
       <p>Play free games, earn points, climb the leaderboard</p>
       <div class="stats-row">
-        <div class="stat-box"><div class="stat-num">10</div><div class="stat-label">Games</div></div>
+        <div class="stat-box"><div class="stat-num">7</div><div class="stat-label">Games</div></div>
         <div class="stat-box"><div class="stat-num" id="statUsers">1</div><div class="stat-label">Players</div></div>
         <div class="stat-box"><div class="stat-num" id="statScore">0</div><div class="stat-label">Your Score</div></div>
       </div>
@@ -476,61 +476,12 @@
         <div class="game-desc">Arrange tiles 1–8. Fewer moves = more score!</div>
         <span class="game-badge" style="background:rgba(204,102,255,0.12);color:#cc66ff;border:1px solid rgba(204,102,255,0.3);">Puzzle</span>
       </div>
-      <div class="game-card" style="border-color:rgba(255,50,150,0.25);" onclick="loadGame('rps')">
-        <span class="card-rank rank-hot">✊ VS AI</span>
-        <span class="game-icon">✊</span>
-        <div class="game-title" style="color:#ff4488;">ROCK PAPER SCISSORS</div>
-        <div class="game-desc">Challenge the computer! Best of 5 wins!</div>
-        <span class="game-badge" style="background:rgba(255,50,150,0.12);color:#ff4488;border:1px solid rgba(255,50,150,0.3);">vs Computer</span>
-      </div>
-      <div class="game-card" style="border-color:rgba(0,255,200,0.25);" onclick="loadGame('reaction')">
-        <span class="card-rank rank-fun">⚡ FAST</span>
-        <span class="game-icon">⚡</span>
-        <div class="game-title" style="color:#00ffcc;">REACTION TEST</div>
-        <div class="game-desc">Click when green! Test your reaction speed!</div>
-        <span class="game-badge" style="background:rgba(0,255,200,0.12);color:#00ffcc;border:1px solid rgba(0,255,200,0.3);">Speed Test</span>
-      </div>
       <div class="game-card" style="border-color:rgba(255,200,0,0.25);" onclick="loadGame('flappy')">
         <span class="card-rank rank-hot">🔥 FUN</span>
         <span class="game-icon">🐦</span>
         <div class="game-title" style="color:#ffaa00;">FLAPPY BIRD</div>
         <div class="game-desc">Tap to fly! Avoid the pipes and survive!</div>
         <span class="game-badge" style="background:rgba(255,200,0,0.12);color:#ffaa00;border:1px solid rgba(255,200,0,0.3);">Tap to Play</span>
-      </div>
-      <div class="game-card" style="border-color:rgba(100,200,255,0.25);" onclick="loadGame('g2048')">
-        <span class="card-rank rank-ai">🧠 PRO</span>
-        <span class="game-icon">🔢</span>
-        <div class="game-title" style="color:#44aaff;">2048</div>
-        <div class="game-desc">Merge tiles to reach 2048. Arrow keys to slide!</div>
-        <span class="game-badge" style="background:rgba(100,200,255,0.12);color:#44aaff;border:1px solid rgba(100,200,255,0.3);">Strategy</span>
-      </div>
-      <div class="game-card gc1" onclick="loadGame('rps')">
-        <span class="card-rank rank-fun">✊ VS AI</span>
-        <span class="game-icon">✊</span>
-        <div class="game-title" style="color:#ff2244;">ROCK PAPER SCISSORS</div>
-        <div class="game-desc">Beat the computer! Best of 5 wins!</div>
-        <span class="game-badge" style="background:rgba(255,34,68,0.12);color:#ff2244;border:1px solid rgba(255,34,68,0.3);">vs Computer</span>
-      </div>
-      <div class="game-card gc4" onclick="loadGame('reaction')">
-        <span class="card-rank rank-hot">⚡ FAST</span>
-        <span class="game-icon">⚡</span>
-        <div class="game-title" style="color:#00ff88;">REACTION TEST</div>
-        <div class="game-desc">Click when it turns green! How fast are you?</div>
-        <span class="game-badge" style="background:rgba(0,255,136,0.12);color:#00ff88;border:1px solid rgba(0,255,136,0.3);">Speed</span>
-      </div>
-      <div class="game-card gc2" onclick="loadGame('flappy')">
-        <span class="card-rank rank-hot">🔥 HOT</span>
-        <span class="game-icon">🐦</span>
-        <div class="game-title" style="color:#ff6600;">FLAPPY BIRD</div>
-        <div class="game-desc">Tap to fly! Avoid the pipes!</div>
-        <span class="game-badge" style="background:rgba(255,102,0,0.12);color:#ff6600;border:1px solid rgba(255,102,0,0.3);">Tap to Play</span>
-      </div>
-      <div class="game-card gc3" onclick="loadGame('g2048')">
-        <span class="card-rank rank-ai">🔢 PRO</span>
-        <span class="game-icon">🔢</span>
-        <div class="game-title" style="color:#ffcc00;">2048</div>
-        <div class="game-desc">Merge tiles to reach 2048!</div>
-        <span class="game-badge" style="background:rgba(255,204,0,0.12);color:#ffcc00;border:1px solid rgba(255,204,0,0.3);">Arrow Keys</span>
       </div>
     </div>
   </div>
@@ -880,7 +831,7 @@ function showToast(msg){
 function loadGame(g){
   currentGameName=g;
   gamePaused=false;
-  const titles={snake:'🐍 Snake',ttt:'❌ Tic Tac Toe',memory:'🃏 Memory Match',quiz:'🎯 Quiz Arena',mine:'💣 Minesweeper',slide:'🧩 Slide Puzzle',rps:'✊ Rock Paper Scissors',reaction:'⚡ Reaction Test',flappy:'🐦 Flappy Bird',g2048:'🔢 2048'};
+  const titles={snake:'🐍 Snake',ttt:'❌ Tic Tac Toe',memory:'🃏 Memory Match',quiz:'🎯 Quiz Arena',mine:'💣 Minesweeper',slide:'🧩 Slide Puzzle',flappy:'🐦 Flappy Bird'};
   document.getElementById('gameTitle').textContent=titles[g];
   showPage('game');
   const gc=document.getElementById('gameContainer');
@@ -891,14 +842,7 @@ function loadGame(g){
   else if(g==='quiz')buildQuiz(gc);
   else if(g==='mine')buildMine(gc);
   else if(g==='slide')buildSlide(gc);
-  else if(g==='rps')buildRPS(gc);
-  else if(g==='reaction')buildReaction(gc);
   else if(g==='flappy')buildFlappy(gc);
-  else if(g==='g2048')build2048(gc);
-  else if(g==='rps')buildRPS(gc);
-  else if(g==='reaction')buildReaction(gc);
-  else if(g==='flappy')buildFlappy(gc);
-  else if(g==='g2048')build2048(gc);
 }
 
 // ===== SNAKE =====
@@ -1185,235 +1129,207 @@ function buildSlide(gc){
   shuffleSlide();
 }
 
-// ===== ROCK PAPER SCISSORS =====
-function buildRPS(gc){
-  const choices=['✊','✋','✌️'];
-  const names=['Rock','Paper','Scissors'];
-  let playerScore=0,compScore=0,round=0,total=5;
-  function render(msg=''){
-    gc.innerHTML=`
-      <div class="score-display">You: <span style="color:#00ff88">${playerScore}</span> | Computer: <span style="color:#ff4444">${compScore}</span> | Round ${round}/${total}</div>
-      <div style="text-align:center;font-size:1rem;color:#ffcc00;margin:10px 0;min-height:30px;">${msg}</div>
-      <div style="display:flex;justify-content:center;gap:15px;margin:20px 0;">
-        ${choices.map((c,i)=>`<button onclick="rpsPlay(${i})" style="font-size:2.5rem;background:rgba(255,0,30,0.1);border:2px solid rgba(255,0,30,0.3);border-radius:16px;padding:15px 20px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='#ff4488'" onmouseout="this.style.borderColor='rgba(255,0,30,0.3)'">${c}</button>`).join('')}
-      </div>
-      <p style="text-align:center;color:#556;font-size:0.85rem;">Choose ✊ Rock, ✋ Paper, or ✌️ Scissors!</p>
-      <div class="game-controls"><button class="btn-game" onclick="buildRPS(document.getElementById('gameContainer'))">🔄 New Game</button></div>`;
-  }
-  window.rpsPlay=i=>{
-    if(round>=total)return;
-    const comp=Math.floor(Math.random()*3);
-    const result=(i===comp)?'draw':(i-comp+3)%3===1?'win':'lose';
-    round++;
-    if(result==='win'){playerScore++;playSound('win');}
-    else if(result==='lose'){compScore++;playSound('wrong');}
-    else playSound('click');
-    const msg=result==='draw'?`🤝 Draw! Both chose ${choices[i]}`
-      :result==='win'?`🎉 You Win! ${choices[i]} beats ${choices[comp]}`
-      :`😅 Computer wins! ${choices[comp]} beats ${choices[i]}`;
-    if(round>=total){
-      setTimeout(()=>{
-        const final=playerScore>compScore?'🏆 YOU WIN THE MATCH!'
-          :playerScore<compScore?'💻 Computer wins the match!'
-          :'🤝 Match Draw!';
-        addScore('Rock Paper Scissors',playerScore*20);
-        render(final+' Game Over!');
-      },500);
-    } else render(msg);
-  };
-  render('Choose your move!');
-}
-
-// ===== REACTION SPEED TEST =====
-function buildReaction(gc){
-  let state='idle',startTime,best=null,attempts=0;
-  let timeout;
-  function render(){
-    const colors={idle:'#1a0005',waiting:'#220000',go:'#003300',early:'#440000'};
-    const texts={idle:'🎯 Click START to begin!',waiting:'⏳ Wait for GREEN...',go:'🟢 CLICK NOW!!!',early:'❌ Too Early! Wait for green!'};
-    gc.innerHTML=`
-      <div style="text-align:center;padding:10px;">
-        <div style="font-size:0.9rem;color:#888;margin-bottom:10px;">Attempts: ${attempts}/5 | Best: ${best?best+'ms':'--'}</div>
-        <div id="reactionBox" onclick="reactionClick()" style="width:100%;height:220px;background:${colors[state]};border:3px solid ${state==='go'?'#00ff44':'rgba(255,0,30,0.3)'};border-radius:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;margin-bottom:15px;">
-          <div style="font-size:1.2rem;color:${state==='go'?'#00ff44':'#888'};font-family:'Orbitron',monospace;text-align:center;">${texts[state]}</div>
-        </div>
-        <div id="resultMsg" style="font-family:'Orbitron',monospace;font-size:1.5rem;color:#ffcc00;min-height:40px;text-align:center;"></div>
-        <div class="game-controls" style="margin-top:10px;">
-          <button class="btn-game" onclick="startReaction()">▶ START</button>
-          <button class="btn-game" onclick="buildReaction(document.getElementById('gameContainer'))">🔄 Reset</button>
-        </div>
-      </div>`;
-  }
-  window.startReaction=()=>{
-    if(attempts>=5)return;
-    state='waiting';render();
-    const delay=1500+Math.random()*3000;
-    timeout=setTimeout(()=>{state='go';startTime=Date.now();render();},delay);
-  };
-  window.reactionClick=()=>{
-    if(state==='waiting'){clearTimeout(timeout);state='early';render();setTimeout(()=>{state='idle';render();},1500);}
-    else if(state==='go'){
-      const ms=Date.now()-startTime;
-      attempts++;
-      if(!best||ms<best)best=ms;
-      state='idle';
-      const rating=ms<200?'⚡ SUPERHUMAN!'
-        :ms<300?'🔥 Excellent!'
-        :ms<400?'👍 Good!'
-        :ms<600?'😐 Average'
-        :'🐌 Too Slow!';
-      render();
-      document.getElementById('resultMsg').textContent=`${ms}ms — ${rating}`;
-      if(attempts>=5){addScore('Reaction Test',Math.max(10,Math.floor(1000-best)));}
-      playSound('win');
-    }
-  };
-  render();
-}
-
 // ===== FLAPPY BIRD =====
 function buildFlappy(gc){
-  gc.innerHTML+=`
+  gc.innerHTML+= `
     <div class="score-display">Score: <span id="flScore">0</span> | Best: <span id="flBest">0</span></div>
-    <canvas id="flCanvas" width="360" height="400" style="display:block;margin:0 auto;border:2px solid #ffaa00;border-radius:8px;background:#000;"></canvas>
-    <div class="game-controls">
-      <button class="btn-game" onclick="flStart()">▶ Start</button>
+    <canvas id="flCanvas" width="340" height="380" style="display:block;margin:0 auto;border:2px solid #ffaa00;border-radius:8px;cursor:pointer;"></canvas>
+    <div class="game-controls" style="margin-top:10px;">
+      <button class="btn-game" onclick="flStart()">▶ Start / Restart</button>
       <button class="btn-pause" onclick="if(gamePaused)resumeGame();else pauseGame();">⏸ Pause</button>
     </div>
-    <p style="text-align:center;color:#556;font-size:0.85rem;">Press SPACE or Click/Tap to flap!</p>`;
-  const C=document.getElementById('flCanvas');
-  const ctx=C.getContext('2d');
-  const W=360,H=400,PIPE_W=50,GAP=130,GRAVITY=0.35,JUMP=-7;
-  let bird,pipes,score,flBest=0,running=false,flInterval;
-  function flReset(){
-    bird={x:80,y:200,vy:0,r:14};
-    pipes=[];score=0;
-    document.getElementById('flScore').textContent=0;
-    for(let i=0;i<3;i++)pipes.push({x:360+i*180,top:80+Math.random()*160});
+    <p style="text-align:center;color:#556;font-size:0.85rem;margin-top:6px;">SPACE / Click / Tap to flap!</p>`;
+
+  const canvas = document.getElementById('flCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = 340, H = 380;
+  const GRAVITY = 0.4, JUMP = -7, PIPE_W = 48, GAP = 140, SPEED = 2.2;
+
+  let bird, pipes, score, flBest = 0, running = false, started = false, animId;
+
+  function init(){
+    bird = {x:80, y:180, vy:0, r:13};
+    pipes = [{x:W+60, top:randomTop()}, {x:W+60+220, top:randomTop()}];
+    score = 0;
+    started = false;
+    if(document.getElementById('flScore')) document.getElementById('flScore').textContent = 0;
   }
-  function flDraw(){
-    // Sky
-    const sky=ctx.createLinearGradient(0,0,0,H);
-    sky.addColorStop(0,'#000510');sky.addColorStop(1,'#001020');
-    ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
-    // Pipes
-    pipes.forEach(p=>{
-      ctx.fillStyle='#ffaa00';
-      ctx.fillRect(p.x,0,PIPE_W,p.top);
-      ctx.fillRect(p.x,p.top+GAP,PIPE_W,H-p.top-GAP);
-      // pipe caps
-      ctx.fillStyle='#cc8800';
-      ctx.fillRect(p.x-4,p.top-12,PIPE_W+8,12);
-      ctx.fillRect(p.x-4,p.top+GAP,PIPE_W+8,12);
+
+  function randomTop(){ return 60 + Math.random() * (H - GAP - 100); }
+
+  function drawBg(){
+    // Dark sky gradient
+    const g = ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#000820'); g.addColorStop(1,'#001535');
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+    // Stars
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    [[30,40],[80,20],[150,60],[220,30],[300,50],[310,15],[50,90],[180,15]].forEach(([x,y])=>{
+      ctx.beginPath(); ctx.arc(x,y,1,0,Math.PI*2); ctx.fill();
     });
-    // Ground
-    ctx.fillStyle='#442200';ctx.fillRect(0,H-20,W,20);
-    ctx.fillStyle='#884400';ctx.fillRect(0,H-20,W,4);
-    // Bird
-    ctx.save();ctx.translate(bird.x,bird.y);
-    ctx.rotate(Math.min(Math.max(bird.vy*0.05,-0.5),1));
-    ctx.fillStyle='#ffdd00';ctx.beginPath();ctx.arc(0,0,bird.r,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#ff8800';ctx.beginPath();ctx.ellipse(8,2,8,5,0,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#000';ctx.beginPath();ctx.arc(5,-4,3,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(6,-5,1.5,0,Math.PI*2);ctx.fill();
+  }
+
+  function drawPipes(){
+    pipes.forEach(p=>{
+      // Top pipe
+      const tg = ctx.createLinearGradient(p.x,0,p.x+PIPE_W,0);
+      tg.addColorStop(0,'#cc8800'); tg.addColorStop(0.5,'#ffaa00'); tg.addColorStop(1,'#cc8800');
+      ctx.fillStyle = tg;
+      ctx.fillRect(p.x, 0, PIPE_W, p.top);
+      // Top cap
+      ctx.fillStyle = '#ffcc44';
+      ctx.fillRect(p.x-5, p.top-15, PIPE_W+10, 15);
+      // Bottom pipe
+      ctx.fillStyle = tg;
+      ctx.fillRect(p.x, p.top+GAP, PIPE_W, H-p.top-GAP);
+      // Bottom cap
+      ctx.fillStyle = '#ffcc44';
+      ctx.fillRect(p.x-5, p.top+GAP, PIPE_W+10, 15);
+    });
+  }
+
+  function drawBird(){
+    ctx.save();
+    ctx.translate(bird.x, bird.y);
+    const angle = Math.min(Math.max(bird.vy * 0.05, -0.5), 1.2);
+    ctx.rotate(angle);
+    // Body
+    ctx.fillStyle = '#ffdd00';
+    ctx.beginPath(); ctx.arc(0,0,bird.r,0,Math.PI*2); ctx.fill();
+    // Wing
+    ctx.fillStyle = '#ffaa00';
+    ctx.beginPath(); ctx.ellipse(-3, 3, 8, 5, 0.3, 0, Math.PI*2); ctx.fill();
+    // Beak
+    ctx.fillStyle = '#ff6600';
+    ctx.beginPath(); ctx.moveTo(bird.r,0); ctx.lineTo(bird.r+8,3); ctx.lineTo(bird.r,-3); ctx.closePath(); ctx.fill();
+    // Eye
+    ctx.fillStyle = '#000';
+    ctx.beginPath(); ctx.arc(5,-4,3,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.beginPath(); ctx.arc(6,-5,1.2,0,Math.PI*2); ctx.fill();
     ctx.restore();
   }
-  function flTick(){
-    if(gamePaused||!running)return;
-    bird.vy+=GRAVITY;bird.y+=bird.vy;
-    pipes.forEach(p=>{
-      p.x-=2.5;
-      if(p.x+PIPE_W<0){p.x=360;p.top=80+Math.random()*160;score++;document.getElementById('flScore').textContent=score;playSound('eat');}
-      if(bird.x+bird.r>p.x&&bird.x-bird.r<p.x+PIPE_W&&(bird.y-bird.r<p.top||bird.y+bird.r>p.top+GAP)){flGameOver();return;}
-    });
-    if(bird.y+bird.r>H-20||bird.y-bird.r<0){flGameOver();return;}
-    flDraw();
-  }
-  function flGameOver(){
-    running=false;clearInterval(flInterval);
-    if(score>flBest)flBest=score;
-    document.getElementById('flBest').textContent=flBest;
-    addScore('Flappy Bird',score*15);
-    playSound('lose');
-    ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(0,0,W,H);
-    ctx.fillStyle='#ffaa00';ctx.font='bold 28px Orbitron';ctx.textAlign='center';ctx.fillText('GAME OVER!',W/2,H/2-20);
-    ctx.fillStyle='#fff';ctx.font='18px Rajdhani';ctx.fillText('Score: '+score,W/2,H/2+20);
-  }
-  window.flStart=()=>{
-    clearInterval(flInterval);flReset();running=true;gamePaused=false;
-    document.getElementById('pauseOverlay').classList.remove('show');
-    flInterval=setInterval(flTick,16);
-  };
-  window.flJump=()=>{if(running&&!gamePaused){bird.vy=JUMP;playSound('click');}};
-  C.addEventListener('click',window.flJump);
-  document.addEventListener('keydown',e=>{if(e.code==='Space'&&currentGameName==='flappy'){e.preventDefault();window.flJump();}});
-  flReset();flDraw();
-}
 
-// ===== 2048 =====
-function build2048(gc){
-  let board,score,best2048=0;
-  function newBoard(){return Array(4).fill(null).map(()=>Array(4).fill(0));}
-  function addTile(b){
-    const empty=[];
-    b.forEach((r,i)=>r.forEach((v,j)=>{if(!v)empty.push([i,j]);}));
-    if(!empty.length)return;
-    const [i,j]=empty[Math.floor(Math.random()*empty.length)];
-    b[i][j]=Math.random()<0.9?2:4;
+  function drawGround(){
+    ctx.fillStyle = '#442200';
+    ctx.fillRect(0, H-22, W, 22);
+    ctx.fillStyle = '#66aa00';
+    ctx.fillRect(0, H-22, W, 5);
   }
-  function startGame(){board=newBoard();score=0;addTile(board);addTile(board);render();}
-  function slide(row){
-    let r=row.filter(v=>v);
-    for(let i=0;i<r.length-1;i++){if(r[i]===r[i+1]){r[i]*=2;score+=r[i];r[i+1]=0;}}
-    r=r.filter(v=>v);
-    while(r.length<4)r.push(0);
-    return r;
+
+  function drawScore(){
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 28px Orbitron, monospace';
+    ctx.textAlign = 'center';
+    ctx.shadowColor = '#ffaa00'; ctx.shadowBlur = 10;
+    ctx.fillText(score, W/2, 45);
+    ctx.shadowBlur = 0;
   }
-  function move(dir){
-    let moved=false;
-    const b=board.map(r=>[...r]);
-    if(dir==='left'){board=board.map(r=>{const s=slide(r);if(s.join()!==r.join())moved=true;return s;});}
-    else if(dir==='right'){board=board.map(r=>{const s=slide([...r].reverse()).reverse();if(s.join()!==r.join())moved=true;return s;});}
-    else if(dir==='up'){
-      for(let j=0;j<4;j++){const col=board.map(r=>r[j]);const s=slide(col);s.forEach((v,i)=>{if(board[i][j]!==v)moved=true;board[i][j]=v;});}
+
+  function drawStartScreen(){
+    drawBg(); drawGround(); drawBird(); drawScore();
+    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle = '#ffaa00';
+    ctx.font = 'bold 22px Orbitron, monospace';
+    ctx.textAlign = 'center';
+    ctx.shadowColor = '#ffaa00'; ctx.shadowBlur = 15;
+    ctx.fillText('🐦 FLAPPY BIRD', W/2, H/2-30);
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = '#fff';
+    ctx.font = '16px Rajdhani, sans-serif';
+    ctx.fillText('Click START or TAP to play!', W/2, H/2+10);
+    ctx.fillText('Avoid the pipes!', W/2, H/2+35);
+  }
+
+  function checkCollision(){
+    // Ground / ceiling
+    if(bird.y + bird.r > H-22 || bird.y - bird.r < 0) return true;
+    // Pipes
+    return pipes.some(p=>{
+      return bird.x + bird.r > p.x+4 &&
+             bird.x - bird.r < p.x + PIPE_W-4 &&
+             (bird.y - bird.r < p.top || bird.y + bird.r > p.top+GAP);
+    });
+  }
+
+  function loop(){
+    if(!running) return;
+    if(gamePaused){ animId = requestAnimationFrame(loop); return; }
+
+    // Update bird
+    bird.vy += GRAVITY;
+    bird.y += bird.vy;
+
+    // Update pipes
+    pipes.forEach(p=>{
+      p.x -= SPEED;
+      if(p.x + PIPE_W < 0){
+        p.x = W + 60;
+        p.top = randomTop();
+        score++;
+        if(document.getElementById('flScore')) document.getElementById('flScore').textContent = score;
+        playSound('eat');
+      }
+    });
+
+    // Collision
+    if(checkCollision()){
+      running = false;
+      if(score > flBest){ flBest = score; if(document.getElementById('flBest')) document.getElementById('flBest').textContent = flBest; }
+      addScore('Flappy Bird', score * 15);
+      playSound('lose');
+      // Draw game over
+      drawBg(); drawPipes(); drawGround(); drawBird(); drawScore();
+      ctx.fillStyle = 'rgba(0,0,0,0.65)';
+      ctx.fillRect(0,0,W,H);
+      ctx.fillStyle = '#ff4444';
+      ctx.font = 'bold 26px Orbitron, monospace';
+      ctx.textAlign = 'center';
+      ctx.shadowColor = '#ff0000'; ctx.shadowBlur = 20;
+      ctx.fillText('GAME OVER!', W/2, H/2-25);
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = '#ffcc00';
+      ctx.font = '18px Rajdhani, sans-serif';
+      ctx.fillText('Score: ' + score + '  |  Best: ' + flBest, W/2, H/2+15);
+      ctx.fillStyle = '#aaa';
+      ctx.font = '14px Rajdhani, sans-serif';
+      ctx.fillText('Press START to play again!', W/2, H/2+45);
+      return;
     }
-    else if(dir==='down'){
-      for(let j=0;j<4;j++){const col=board.map(r=>r[j]).reverse();const s=slide(col).reverse();s.forEach((v,i)=>{if(board[i][j]!==v)moved=true;board[i][j]=v;});}
-    }
-    if(moved){addTile(board);if(score>best2048)best2048=score;addScore('2048',score);render();playSound('click');}
+
+    // Draw everything
+    drawBg(); drawPipes(); drawGround(); drawBird(); drawScore();
+    animId = requestAnimationFrame(loop);
   }
-  const tileColors={0:'#0a0010',2:'#1a0030',4:'#2a0050',8:'#3a0070',16:'#5a0090',32:'#7a00aa',64:'#9900cc',128:'#bb00ee',256:'#dd00ff',512:'#ff2244',1024:'#ff6600',2048:'#ffcc00'};
-  function render(){
-    document.getElementById('g2048score').textContent=score;
-    document.getElementById('g2048best').textContent=best2048;
-    const boardEl=document.getElementById('g2048board');
-    boardEl.innerHTML=board.map(row=>row.map(v=>`
-      <div style="background:${tileColors[v]||'#ffcc00'};border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:${v>99?v>999?'0.8rem':'1rem':'1.3rem'};font-weight:700;color:${v>=128?'#fff':'#aaa'};aspect-ratio:1;box-shadow:${v?'0 0 10px rgba(255,100,255,0.3)':'none'};">
-        ${v||''}
-      </div>`).join('')).join('');
-  }
-  gc.innerHTML+=`
-    <div class="score-display">Score: <span id="g2048score">0</span> | Best: <span id="g2048best">0</span></div>
-    <div id="g2048board" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:320px;margin:0 auto 15px;padding:10px;background:rgba(255,0,50,0.05);border-radius:12px;border:1px solid rgba(255,0,50,0.2);"></div>
-    <div class="game-controls">
-      <button class="btn-game" onclick="startGame2048()">🔄 New Game</button>
-    </div>
-    <p style="text-align:center;color:#556;font-size:0.85rem;margin-top:8px;">Use Arrow Keys to slide tiles!</p>`;
-  window.startGame2048=startGame;
-  document.addEventListener('keydown',e=>{
-    if(currentGameName!=='g2048')return;
-    const map={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'};
-    if(map[e.key]){e.preventDefault();move(map[e.key]);}
+
+  window.flStart = ()=>{
+    cancelAnimationFrame(animId);
+    init();
+    running = true;
+    started = true;
+    gamePaused = false;
+    document.getElementById('pauseOverlay').classList.remove('show');
+    loop();
+  };
+
+  window.flJump = ()=>{
+    if(!started){ flStart(); return; }
+    if(running && !gamePaused){ bird.vy = JUMP; playSound('click'); }
+  };
+
+  // Click on canvas
+  canvas.addEventListener('click', window.flJump);
+  canvas.addEventListener('touchstart', e=>{ e.preventDefault(); window.flJump(); }, {passive:false});
+
+  // Space key
+  document.addEventListener('keydown', e=>{
+    if(e.code==='Space' && currentGameName==='flappy'){ e.preventDefault(); window.flJump(); }
   });
-  // Touch support for 2048
-  let tx=0,ty=0;
-  document.getElementById('g2048board').addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
-  document.getElementById('g2048board').addEventListener('touchend',e=>{
-    const dx=e.changedTouches[0].clientX-tx;
-    const dy=e.changedTouches[0].clientY-ty;
-    if(Math.abs(dx)>Math.abs(dy)){move(dx>0?'right':'left');}else{move(dy>0?'down':'up');}
-  });
-  startGame();
+
+  // Draw start screen
+  init();
+  drawStartScreen();
 }
 
 // seed some demo scores for leaderboard
