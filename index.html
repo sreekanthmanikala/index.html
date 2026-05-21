@@ -207,6 +207,21 @@
   .tech-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
   .pill { padding: 6px 16px; background: rgba(0,245,255,0.1); border: 1px solid rgba(0,245,255,0.3); border-radius: 20px; font-size: 0.85rem; color: var(--neon); }
 
+  /* FULLSCREEN */
+  #gameContainer:fullscreen {
+    background: #050000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+  }
+  #gameContainer:-webkit-full-screen {
+    background: #050000;
+    padding: 20px;
+  }
+
   /* D-PAD for mobile */
   .dpad { display: none; }
   /* MOBILE BOTTOM NAV */
@@ -492,6 +507,7 @@
       <div class="game-header">
         <button class="btn-back" onclick="showPage('home')">← Back</button>
         <div class="game-frame-title" id="gameTitle">Game</div>
+        <button onclick="toggleFullscreen()" style="margin-left:auto;padding:8px 16px;background:linear-gradient(135deg,#ff2244,#880010);border:none;border-radius:8px;color:#fff;font-family:'Orbitron',monospace;font-size:0.7rem;cursor:pointer;letter-spacing:1px;" id="fsBtn">⛶ FULLSCREEN</button>
       </div>
       <div class="game-container" id="gameContainer" style="position:relative;">
         <div id="pauseOverlay">
@@ -656,6 +672,24 @@ const loadTimer=setInterval(()=>{
     },400);
   }
 },50);
+
+// ===== FULLSCREEN =====
+function toggleFullscreen(){
+  const el = document.getElementById('gameContainer');
+  if(!document.fullscreenElement){
+    el.requestFullscreen().catch(err=>{
+      showToast('Fullscreen not supported on this browser!');
+    });
+    document.getElementById('fsBtn').textContent='✕ EXIT FULL';
+  } else {
+    document.exitFullscreen();
+    document.getElementById('fsBtn').textContent='⛶ FULLSCREEN';
+  }
+}
+document.addEventListener('fullscreenchange',()=>{
+  const btn=document.getElementById('fsBtn');
+  if(btn) btn.textContent=document.fullscreenElement?'✕ EXIT FULL':'⛶ FULLSCREEN';
+});
 
 // ===== PAUSE SYSTEM =====
 let gamePaused=false;
