@@ -145,7 +145,7 @@
   .game-container { background: var(--card); border: 1px solid rgba(0,245,255,0.2); border-radius: 16px; padding: 20px; max-width: 700px; margin: 0 auto; }
 
   /* SNAKE */
-  #snakeCanvas { display: block; margin: 0 auto; border: 2px solid #ff2244; border-radius: 8px; background: #000; }
+  #snakeCanvas { display: block; margin: 0 auto; border: 2px solid var(--neon); border-radius: 8px; background: #000; }
   .game-controls { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 15px 0; }
   .btn-game { padding: 10px 24px; background: linear-gradient(135deg, var(--neon), #0080ff); border: none; border-radius: 8px; color: #000; font-weight: 700; font-family: 'Rajdhani', sans-serif; font-size: 1rem; cursor: pointer; transition: transform 0.2s; }
   .btn-game:hover { transform: scale(1.05); }
@@ -675,27 +675,20 @@ const loadTimer=setInterval(()=>{
 
 // ===== FULLSCREEN =====
 function toggleFullscreen(){
-  // Try to fullscreen the canvas first, then game container
-  const canvas = document.querySelector('#gameContainer canvas');
-  const el = canvas || document.getElementById('gameContainer');
+  const el = document.getElementById('gameContainer');
   if(!document.fullscreenElement){
-    el.requestFullscreen().catch(()=>{
-      // Try webkit fallback
-      if(el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-      else showToast('Fullscreen not supported!');
+    el.requestFullscreen().catch(err=>{
+      showToast('Fullscreen not supported on this browser!');
     });
+    document.getElementById('fsBtn').textContent='✕ EXIT FULL';
   } else {
-    if(document.exitFullscreen) document.exitFullscreen();
-    else if(document.webkitExitFullscreen) document.webkitExitFullscreen();
+    document.exitFullscreen();
+    document.getElementById('fsBtn').textContent='⛶ FULLSCREEN';
   }
 }
 document.addEventListener('fullscreenchange',()=>{
   const btn=document.getElementById('fsBtn');
-  if(btn) btn.textContent=document.fullscreenElement?'✕ EXIT':'⛶ FULLSCREEN';
-});
-document.addEventListener('webkitfullscreenchange',()=>{
-  const btn=document.getElementById('fsBtn');
-  if(btn) btn.textContent=document.webkitFullscreenElement?'✕ EXIT':'⛶ FULLSCREEN';
+  if(btn) btn.textContent=document.fullscreenElement?'✕ EXIT FULL':'⛶ FULLSCREEN';
 });
 
 // ===== PAUSE SYSTEM =====
@@ -923,7 +916,7 @@ function buildSnake(gc){
       if(score>best)best=score;
       document.getElementById('snakeBest').textContent=best;
       addScore('Snake',score);
-      C.fillStyle='rgba(0,0,0,0.7)';C.fillRect(0,0,360,360);
+      C.fillStyle='rgba(255,0,128,0.4)';C.fillRect(0,0,360,360);
       C.fillStyle='#fff';C.font='bold 28px Orbitron';C.textAlign='center';C.fillText('GAME OVER!',180,180);
       return;
     }
